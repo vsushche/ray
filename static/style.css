@@ -1,0 +1,11 @@
+table {
+    border: 0px;
+    border-collapse: collapse;
+    border-spacing: 0px;
+}
+
+td, img {
+    padding: 0px;
+    border-width: 0px;
+    margin: 0px;
+}

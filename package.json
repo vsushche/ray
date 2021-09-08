@@ -1,0 +1,35 @@
+{
+  "name": "ray",
+  "version": "1.0.0",
+  "description": "https://github.com/Mark-Kovalyov/CardRaytracerBenchmark/blob/master/nodejs/card-raytracer.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "express": "node express",
+    "cluster": "node cluster",
+    "mol": "moleculer-runner --hot --instances 8 m.*.service.js",
+    "nats": "docker run -d --rm --name nats -p 4222:4222 -p 6222:6222 -p 8222:8222 nats",
+    "redis": "docker run -d --rm --name redis -p 6379:6379 redis",
+    "mol-api-nats": "TRANSPORTER=nats://ua-tl-u005:4222 moleculer-runner --instances 4 m.api.service.js",
+    "mol-render-nats": "TRANSPORTER=nats://ua-tl-u005:4222 moleculer-runner --instances 8 m.render.service.js",
+    "mol-render2-nats": "TRANSPORTER=nats://ua-tl-u005:4222 moleculer-runner --instances 1 m.render2.service.js",
+    "mol-api-redis": "TRANSPORTER=redis://ua-tl-u005:6379 moleculer-runner --instances 8 m.api.service.js ",
+    "mol-render-redis": "TRANSPORTER=redis://ua-tl-u005:6379 moleculer-runner --instances 8 m.render.service.js",
+    "mol-render2-redis": "TRANSPORTER=redis://ua-tl-u005:6379 moleculer-runner --instances 1 m.render2.service.js",
+    "sync": "for HOST in ua-tl-u005 ua-tl-u006 ua-tl-u007 ua-tl-u008;do rsync -av --del --exclude-from=rsync-exclude.txt . root@$HOST:~/ray/;done"
+  },
+  "author": "VS",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "ioredis": "^4.14.1",
+    "jpeg-js": "^0.3.6",
+    "moleculer": "^0.13.11",
+    "moleculer-web": "^0.8.5",
+    "morgan": "^1.9.1",
+    "nats": "^1.3.2"
+  },
+  "devDependencies": {
+    "moleculer-repl": "^0.6.1"
+  }
+}

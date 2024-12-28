@@ -132,8 +132,9 @@ function sampler(o, d) {
 }
 
 
-function* trace(startX, startY, endX, endY) {
-	console.log(process.pid, { startX, startY, endX, endY});
+function trace(startX, startY, endX, endY) {
+	const startTime = Date.now();
+	console.log('%s processId: %s, starting rendering with %o', new Date().toISOString(), process.pid, { startX, startY, endX, endY});
 	const v5 = new Vector(13, 13, 13);
 	const v6 = new Vector(17, 16, 8);
 	let g = (new Vector(-6, -16, 0)).norm();
@@ -146,7 +147,6 @@ function* trace(startX, startY, endX, endY) {
 	const height = endY - startY;
 	let i = width * height * 4;
 	const data = Buffer.alloc(i);
-	let pauseTime = Date.now();
 
 	for (let y = startY; y < endY; y++) {
 		for (let x = startX; x < endX; x++) {
@@ -162,13 +162,9 @@ function* trace(startX, startY, endX, endY) {
 			data[--i] = color.z;
 			data[--i] = color.y;
 			data[--i] = color.x;
-
-			if(Date.now() - pauseTime > 50) {
-				yield;
-				pauseTime = Date.now();
-			}
 		}
 	}
+	console.log('%s processId: %s, finished rendering, duration %s ms', new Date().toISOString(), process.pid, Date.now() - startTime);
 	return jpeg.encode({ data, width, height }, 50).data;
 }
 

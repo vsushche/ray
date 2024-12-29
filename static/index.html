@@ -4,10 +4,14 @@
         <link rel="stylesheet" type="text/css" href="./style.css">
     </head>
     <body>
-        <h1>
-            Test render page
-        </h1>
-        <button id='renderButton'>Render</button>
+        <h2>
+            Demo render page
+        </h2>
+        <p>
+            This is a demo page for multithreaded\multicore rendering using 
+            <a href="https://fabiensanglard.net/rayTracing_back_of_business_card/">Business Card raytracer</a>
+        </p>
+        <label>Number pieces: </label>
         <select id='renderPicesNumber'>
             <option value=1>1</option>
             <option value=2>4</option>
@@ -16,6 +20,7 @@
             <option value=8>64</option>
             <option value=16>256</option>
         </select>
+        <button id='renderButton'>Render</button>
         <hr>
         <div id='renderPlaceholder'>
             Image will appear here
